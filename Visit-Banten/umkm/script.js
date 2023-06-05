@@ -1,34 +1,42 @@
-document.addEventListener("DOMContentLoaded", function () {
-  var data = [
-    { category: "Sepatu", content: "Ini adalah card sepatu." },
-    { category: "Pakaian", content: "Ini adalah card pakaian." },
-    { category: "Aksesoris", content: "Ini adalah card aksesoris." },
-  ];
+// sort
+const cardContainer = document.querySelector(".row-cols-1");
+const sortMenu = document.getElementById("sort-menu");
 
-  // Mengurutkan data berdasarkan kategori
-  var sortedData = data.sort(function (a, b) {
-    if (a.category < b.category) return -1;
-    if (a.category > b.category) return 1;
-    return 0;
+sortMenu.addEventListener("click", function (event) {
+  event.preventDefault();
+  const selectedCategory = event.target.textContent;
+  const cards = cardContainer.querySelectorAll(".col");
+
+  cards.forEach(function (card) {
+    const cardCategory = card.querySelector(".card-category").textContent;
+    if (selectedCategory === "Sort by" || selectedCategory === cardCategory) {
+      card.style.display = "block";
+    } else {
+      card.style.display = "none";
+    }
+    if (selectedCategory === "Show all") {
+      card.style.display = "block";
+    }
   });
+});
 
-  var sortedContainer = document.getElementById("sortedData");
+//search
+const searchInput = document.getElementById('searchInput');
+const cards = cardContainer.getElementsByClassName('col');
 
-  // Menambahkan data card yang telah diurutkan ke dalam elemen div
-  sortedData.forEach(function (item) {
-    var card = document.createElement("div");
-    card.className = "card";
+searchInput.addEventListener('input', function(event) {
+  const keyword = event.target.value.toLowerCase();
 
-    var title = document.createElement("h3");
-    title.className = "card-title";
-    title.textContent = item.category;
-
-    var content = document.createElement("p");
-    content.className = "card-text";
-    content.textContent = item.content;
-
-    card.appendChild(title);
-    card.appendChild(content);
-    sortedContainer.appendChild(card);
-  });
+  for (let i = 0; i < cards.length; i++) {
+    const card = cards[i];
+    const title = card.getElementsByClassName('card-title')[0].textContent.toLowerCase();
+    const category = card.getElementsByClassName('card-category')[0].textContent.toLowerCase();
+    const description = card.getElementsByClassName('card-text')[0].textContent.toLowerCase();
+    
+    if (title.includes(keyword) || category.includes(keyword) || description.includes(keyword)) {
+      card.style.display = 'block';
+    } else {
+      card.style.display = 'none';
+    }
+  }
 });
