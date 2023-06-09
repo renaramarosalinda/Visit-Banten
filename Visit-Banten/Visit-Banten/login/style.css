@@ -1,0 +1,30 @@
+.jumbotron{
+    background-image: url(background.jpg);
+    background-attachment: fixed;
+    /* color: white; */
+    background-size: cover;
+    background-position: 0-50px;
+    height: 800px;
+    padding-top: 5rem;
+    text-shadow: 100px;
+}
+
+.Judul {
+    color: white;
+}
+
+section{
+    padding-top: 5rem;
+}
+
+.login{
+    position: center;
+    margin: 0 auto;
+    margin-top: 100px;
+    width: 200px;
+    height: 200px;
+ }
+
+ .card-title {
+    margin: 0;
+ }
